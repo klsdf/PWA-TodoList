@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World PWA</title>
+    <link rel="manifest" href="/manifest.json">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello World PWA!</h1>
+    <p>This is a Progressive Web App!</p>
+    <script src="/sw.js"></script>
+</body>
+
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').then((registration) => {
+            console.log('Service Worker registered with scope:', registration.scope);
+        }).catch((error) => {
+            console.error('Service Worker registration failed:', error);
+        });
+    }
+</script>
+</html>
