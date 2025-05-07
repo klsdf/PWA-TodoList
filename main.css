@@ -1,0 +1,142 @@
+/* 全局样式 */
+*{
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+li:hover {
+    background-color: #f0f0f0; /* 改变背景颜色 */
+    cursor: pointer; /* 鼠标指针变为手型 */
+}
+
+
+/* 页面主体样式 */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+    background-color: #f4f4f9;
+}
+
+/* 输入框样式 */
+#new-todo {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* 添加按钮样式 */
+#add-todo {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 添加按钮悬停样式 */
+#add-todo:hover {
+    background-color: #45a049;
+}
+
+/* 待办事项列表样式 */
+#todo-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+
+/* 待办事项删除按钮样式 */
+
+
+/* 待办事项删除按钮悬停样式 */
+#todo-list li button:hover {
+    background-color: #e53935;
+}
+
+/* 已完成事项列表样式 */
+#completed-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+#completed-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: line-through; /* 默认加上删除线 */
+}
+
+/* 媒体查询：小屏幕设备样式 */
+@media (max-width: 600px) {
+    #new-todo, #add-todo {
+        width: 100%;
+        font-size: 18px;
+    }
+    #todo-list li {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #todo-list li button {
+        margin-left: 10px;
+        width: auto;
+    }
+}
+
+/* 底部导航栏样式 */
+#bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+#bottom-nav button {
+    flex: 1; /* 使按钮均分导航栏的宽度 */
+    padding: 10px 0; /* 调整按钮的上下内边距 */
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 0; /* 移除圆角以便按钮无缝连接 */
+    cursor: pointer;
+    text-align: center; /* 确保文本居中 */
+}
+
+#bottom-nav button:hover {
+    background-color: #45a049;
+}

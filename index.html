@@ -3,22 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World PWA</title>
+    <title>TodoList</title>
     <link rel="manifest" href="/manifest.json">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding-top: 50px;
-        }
-    </style>
+    <link rel="stylesheet" href="./main.css">
+    <script src="./lib/jquery-3.7.1.min.js"></script>
+
 </head>
 <body>
-    <h1>Hello World PWA!</h1>
-    <p>This is a Progressive Web App!</p>
-    <script src="/sw.js"></script>
-</body>
+    <h1>待办事项列表</h1>
+    <input type="text" id="new-todo" placeholder="输入新的待办事项">
+    <button id="add-todo">添加</button>
+    <ul id="todo-list"></ul>
+    <h2>今日完成</h2>
+    <ul id="completed-list"></ul>
 
+    <!-- 统计信息容器 -->
+    <div id="stats-page" style="display: none;">
+        <h1>统计页面</h1>
+        <p id="completed-count"></p>
+
+    </div>
+
+    <!-- 添加底部导航栏 -->
+    <div id="bottom-nav">
+        <button id="home-button">主页</button>
+        <button id="stats-button">统计</button>
+    </div>
+</body>
+<script src="./main.js"></script>
 <script>
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js').then((registration) => {
@@ -27,5 +39,7 @@
             console.error('Service Worker registration failed:', error);
         });
     }
+
+
 </script>
 </html>
