@@ -34,9 +34,9 @@
 <script>
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js').then((registration) => {
-            console.log('Service Worker registered with scope:', registration.scope);
+            console.log('服务工作线程已注册，作用域为:', registration.scope);
         }).catch((error) => {
-            console.error('Service Worker registration failed:', error);
+            console.error('服务工作线程注册失败:', error);
         });
     }
 
