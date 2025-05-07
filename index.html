@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,13 +10,22 @@
     <script src="./lib/jquery-3.7.1.min.js"></script>
 
 </head>
+
 <body>
-    <h1>待办事项列表</h1>
-    <input type="text" id="new-todo" placeholder="输入新的待办事项">
-    <button id="add-todo">添加</button>
-    <ul id="todo-list"></ul>
-    <h2>今日完成</h2>
-    <ul id="completed-list"></ul>
+
+
+    <div id="todo-page">
+        <h1>待办事项列表</h1>
+        <div id="todo-list-container">
+            <input type="text" id="new-todo" placeholder="输入新的待办事项">
+            <button id="add-todo">添加</button>
+            <ul id="todo-list"></ul>
+        </div>
+        <div id="completed-list-container">
+            <h2>今日完成</h2>
+            <ul id="completed-list"></ul>
+        </div>
+    </div>
 
     <!-- 统计信息容器 -->
     <div id="stats-page" style="display: none;">
@@ -42,4 +52,5 @@
 
 
 </script>
+
 </html>

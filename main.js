@@ -129,6 +129,13 @@ document.addEventListener('DOMContentLoaded', () => {
             addCompletedTodoToDOM(todoText);
             todoList.removeChild(event.target);
             saveTodos();
+
+            // 当任务完成时进行震动
+            if (navigator.vibrate) {
+                navigator.vibrate(100); // 震动100毫秒
+            } else {
+                console.log('浏览器不支持震动');
+            }
         }
     });
 
@@ -149,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
  * @function
  */
 function showStatsPage() {
-    $('#todo-list, #completed-list').hide();
+    $('#todo-page').hide();
     $('#stats-page').show();
 
 
@@ -160,7 +167,7 @@ function showStatsPage() {
  * @function
  */
 function showHomePage() {
-    $('#todo-list, #completed-list').show();
+    $('#todo-page').show();
     $('#stats-page').hide();
 }
 
