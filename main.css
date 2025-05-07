@@ -33,19 +33,35 @@ li:hover {
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    padding: 20px;
     margin: 0;
     background-color: #f4f4f9;
+
+/* 取消显示横向滚动条 */
+
+    overflow-x: hidden; /* 取消显示横向滚动条 */
+
 }
+
+#todo-page {
+    padding: 20px;
+}
+
 
 /* 输入框样式 */
 #new-todo {
     width: 80%;
-    padding: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     font-size: 16px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+/* placeholder样式 */
+#new-todo::placeholder {
+    color: #888;
+    padding-left: 10px;
 }
 
 /* 添加按钮样式 */
@@ -88,18 +104,17 @@ body {
 }
 
 #completed-list li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background-color: #eaeaea8a;
+}
+#completed-list li span{
     text-decoration: line-through; /* 默认加上删除线 */
 }
+
 
 /* 媒体查询：小屏幕设备样式 */
 @media (max-width: 600px) {
     #new-todo, #add-todo {
-        width: 100%;
+        width: 100%; /* 确保输入框和按钮占满宽度 */
         font-size: 18px;
     }
     #todo-list li {

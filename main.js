@@ -30,7 +30,9 @@ function loadTodos() {
  */
 function addItemToDOM(todoText, list) {
     const li = document.createElement('li');
-    li.textContent = todoText;
+    const span = document.createElement('span');
+    span.textContent = todoText;
+    li.appendChild(span);
 
     const deleteButton = document.createElement('button');
     deleteButton.textContent = '删除';
