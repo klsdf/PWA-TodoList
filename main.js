@@ -82,6 +82,16 @@ class ElementCreator {
 
 
 class SaveManager {
+
+
+    static loadLastVisitDate() {
+        return localStorage.getItem('lastVisitDate');
+    }
+
+    static saveLastVisitDate(lastVisitDate) {
+        localStorage.setItem('lastVisitDate', lastVisitDate);
+    }
+
     /** 
     * 从本地存储加载待办事项和已完成事项
     * @function
@@ -98,9 +108,6 @@ class SaveManager {
             ElementCreator.createCompletedLi(todoText);
         });
     }
-
-
-
 
     /** 
      * 保存待办事项和已完成事项到本地存储
@@ -151,10 +158,10 @@ addTodoButton.addEventListener('click', () => {
  * @function
  */
 function checkAndUpdateTodos() {
-    const lastVisitDate = localStorage.getItem('lastVisitDate');
-    const currentDate = new Date().toLocaleDateString();
+    const lastVisitDate = SaveManager.loadLastVisitDate();
+    const currentDate = new Date().toLocaleString();
 
-    if (lastVisitDate !== currentDate) {
+    if (lastVisitDate !== currentDate.split(',')[0]) {
         // 如果是新的一天，将所有已完成事项移回待办事项
         $('#completed-list li').each(function () {
             const todoText = $(this).text();
@@ -165,7 +172,7 @@ function checkAndUpdateTodos() {
     }
 
     // 更新最后访问日期
-    localStorage.setItem('lastVisitDate', currentDate);
+    SaveManager.saveLastVisitDate(currentDate);
 }
 
 // 页面加载时检查日期
@@ -175,29 +182,56 @@ $(document).ready(() => {
 });
 
 
+
 /** 
- * 切换到统计页面
- * @function
- */
-function showStatsPage() {
-    $('#todo-page').hide();
-    $('#stats-page').show();
+     * 显示存档的JSON数据
+     * @function
+     */
+function displayJsonData() {
+    const todos = JSON.parse(localStorage.getItem('todos')) || [];
+    const completedTodos = JSON.parse(localStorage.getItem('completedTodos')) || [];
+    const lastVisitDate = SaveManager.loadLastVisitDate();
+    const jsonData = {
+        todos: todos,
+        completedTodos: completedTodos,
+        lastVisitDate: lastVisitDate
+    };
+    $('#json-display').text(JSON.stringify(jsonData, null, 2));
+}
+
+
+class PageChanger {
+    /** 
+     * 显示指定页面
+     * @function
+     * @param {string} pageId - 要显示的页面的ID
+     */
+    static showPage(pageId) {
+        // 隐藏所有页面
+        $('.page').hide();
+        // 显示指定页面
+        $(`#${pageId}`).show();
+    }
+
 
 
 }
 
-/** 
- * 返回主页
- * @function
- */
-function showHomePage() {
-    $('#todo-page').show();
-    $('#stats-page').hide();
-}
+// 复制JSON到剪贴板
+$('#copy-json-button').on('click', () => {
+    const jsonText = $('#json-display').text();
+    navigator.clipboard.writeText(jsonText).then(() => {
+        alert('JSON已复制到剪贴板');
+    }).catch((error) => {
+        console.error('复制失败:', error);
+    });
+});
 
-// 修改统计按钮的事件处理程序
-$('#stats-button').on('click', showStatsPage);
-
-// 修改主页按钮的事件处理程序
-$('#home-button').on('click', showHomePage);
-
+// 修改按钮的事件处理程序以使用PageChanger类
+$('#habit-button').on('click', () => PageChanger.showPage('habit-page'));
+$('#plan-button').on('click', () => PageChanger.showPage('plan-page'));
+$('#stats-button').on('click', () => PageChanger.showPage('stats-page'));
+$('#debug-button').on('click', () => {
+    PageChanger.showPage('debug-page');
+    displayJsonData();
+});

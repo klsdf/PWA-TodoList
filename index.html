@@ -14,7 +14,8 @@
 <body>
 
 
-    <div id="todo-page">
+    <!-- 习惯页面 -->
+    <div id="habit-page" class="page">
         <h1>待办事项列表</h1>
         <div id="todo-list-container">
             <input type="text" id="new-todo" placeholder="输入新的待办事项">
@@ -28,17 +29,35 @@
         </div>
     </div>
 
-    <!-- 统计信息容器 -->
-    <div id="stats-page" style="display: none;">
+    <!-- 统计页面 -->
+    <div id="stats-page" class="page" style="display: none;">
         <h1>统计页面</h1>
         <p id="completed-count"></p>
 
     </div>
 
+
+    <!-- 计划页面 -->
+    <div id="plan-page" class="page" style="display: none;">
+        <h1>计划页面</h1>
+    </div>
+
+    <!-- 测试页面 -->
+    <div id="debug-page" class="page" style="display: none;">
+        <h1>测试页面</h1>
+        <pre id="json-display" style="text-align: left; background-color: #f4f4f9; padding: 10px; border: 2px solid #ddd;"></pre>
+        <button id="copy-json-button">复制JSON</button>
+    </div>
+
+
+
+
     <!-- 添加底部导航栏 -->
     <div id="bottom-nav">
-        <button id="home-button">主页</button>
+        <button id="habit-button">习惯</button>
+        <button id="plan-button">计划</button>
         <button id="stats-button">统计</button>
+        <button id="debug-button">测试</button>
     </div>
 </body>
 <script src="./main.js"></script>
