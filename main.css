@@ -36,11 +36,8 @@ body {
     text-align: center;
     margin: 0;
     background-color: #f4f4f9;
-
-/* 取消显示横向滚动条 */
-
     overflow-x: hidden; /* 取消显示横向滚动条 */
-
+    overflow-y: auto; /* 确保显示纵向滚动条 */
 }
 
 #habit-page {
