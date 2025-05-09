@@ -98,7 +98,13 @@ export class ElementCreator {
             list.removeChild(li);
             if (todoText) {
                 const appData: AppData = SaveManager.loadAppData();
-                appData.todos.splice(appData.todos.indexOf(todoText), 1);
+
+                if (appData.todos.includes(todoText)) {
+                    appData.todos.splice(appData.todos.indexOf(todoText), 1);
+                }
+                if (appData.completedTodos.includes(todoText)) {
+                    appData.completedTodos.splice(appData.completedTodos.indexOf(todoText), 1);
+                }
                 SaveManager.saveAppData(appData);
             }
         });

@@ -40,7 +40,7 @@ class HabitPage extends Page {
         * 检查并更新待办事项
         * @function
         */
-    static checkAndUpdateTodos(appData: AppData ) {
+    static checkAndUpdateTodos(appData: AppData) {
         const lastVisitDate = appData.lastVisitDate;
         const currentDate = new Date().toLocaleString();
 
@@ -82,7 +82,7 @@ class HabitPage extends Page {
             ElementCreator.createCompletedLi(completedTodo);
         }
 
-        
+
     }
 
 }
@@ -98,7 +98,7 @@ $(function () {
     //初始化数据
     const appData: AppData = SaveManager.loadAppData();
 
-    console.log("appData",appData);
+    console.log("appData", appData);
 
 
     HabitPage.onEnter(appData);
