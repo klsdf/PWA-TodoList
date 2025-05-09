@@ -8,7 +8,7 @@
     <link rel="manifest" href="./manifest.json">
     <link rel="stylesheet" href="./main.css">
     <script src="./lib/jquery-3.7.1.min.js"></script>
-
+    <script src="./js/main.js" type="module"></script>
 </head>
 
 <body>
@@ -60,7 +60,8 @@
         <button id="debug-button">测试</button>
     </div>
 </body>
-<script src="./main.js"></script>
+
+
 <script>
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./sw.js').then((registration) => {
@@ -69,8 +70,6 @@
             console.error('服务工作线程注册失败:', error);
         });
     }
-
-
 </script>
 
 </html>
