@@ -70,6 +70,41 @@
             console.error('服务工作线程注册失败:', error);
         });
     }
+
+    // 请求通知权限
+    if (Notification.permission !== 'granted') {
+        Notification.requestPermission().then(permission => {
+            if (permission === 'granted') {
+                console.log('通知权限已授予');
+            }
+        });
+    }
+
+    // 设置定时提醒
+    function scheduleDailyNotification() {
+        const now = new Date();
+        const target = new Date();
+        target.setHours(13, 30, 0, 0); // 设置为1点半
+
+        if (now > target) {
+            target.setDate(target.getDate() + 1); // 如果当前时间已过1点半，设置为明天
+        }
+
+        const timeout = target.getTime() - now.getTime();
+
+        setTimeout(() => {
+            new Notification('提醒', {
+                body: '该吃药了！',
+                icon: '/icons/192x192.png'
+            });
+            scheduleDailyNotification(); // 重新设置下一个提醒
+        }, timeout);
+    }
+
+    // 确保在页面加载时调用
+    if (Notification.permission === 'granted') {
+        scheduleDailyNotification();
+    }
 </script>
 
 </html>
