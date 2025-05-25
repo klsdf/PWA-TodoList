@@ -45,13 +45,18 @@
 }
 
 
-/* 待办事项删除按钮样式 */
 
 
-/* 待办事项删除按钮悬停样式 */
-#todo-list li button:hover {
-    background-color: #e53935;
+.delete-button {
+    background-color: #f44336;
+    color: white;
 }
+
+.delete-button:hover {
+    background-color: #de0e0b;
+}
+
+
 
 /* 已完成事项列表样式 */
 #completed-list {
@@ -61,8 +66,18 @@
 }
 
 #completed-list li {
-    background-color: #eaeaea8a;
+    background-color: #c9c6c6b8;
 }
 #completed-list li span{
     text-decoration: line-through; /* 默认加上删除线 */
+}
+
+#complete-today-button {
+    margin-top: 20px;
+    background-color: #4CAF50;
+    color: white;
+}
+
+#complete-today-button:hover {
+    background-color: #45a049;
 }

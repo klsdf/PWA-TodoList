@@ -17,6 +17,12 @@ export class HabitPage extends Page {
     override onEnter(appData: AppData) {
         HabitPage.updatePage(appData);
         // HabitPage.checkAndUpdateTodos(appData);
+
+        // 添加按钮点击事件
+        const completeTodayButton = document.getElementById('complete-today-button');
+        completeTodayButton?.addEventListener('click', () => {
+            HabitPage.moveCompletedToTodos(appData);
+        });
     }
     onLeave() {
 
@@ -47,6 +53,20 @@ export class HabitPage extends Page {
         SaveManager.saveAppData(appData);
     }
 
+    /** 
+     * 将所有已完成事项移回待办事项
+     * @function
+     */
+    static moveCompletedToTodos(appData: AppData) {
+        $('#completed-list li').each(function () {
+            const todoText = $(this).text();
+            ElementCreator.createTodoLi(todoText);
+            $(this).remove();
+        });
+        appData.todos.push(...appData.completedTodos);
+        appData.completedTodos = [];
+        SaveManager.saveAppData(appData);
+    }
 
     static updatePage(appData: AppData) {
         const todos = appData.todos;

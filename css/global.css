@@ -1,15 +1,13 @@
-
 /* 全局样式 */
 *{
     margin: 0;
     padding: 0;
+    user-select: none;
 }
 
 button {
     padding: 5px 10px;
     font-size: 14px;
-    background-color: #f44336;
-    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -22,7 +20,6 @@ li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    user-select: none;
 }
 
 li:hover {
@@ -41,6 +38,11 @@ body {
     overflow-y: auto; /* 确保显示纵向滚动条 */
 }
 
+/* 新增全宽按钮样式 */
+.full-width-button {
+    width: 100%;
+    box-sizing: border-box; /* 包括内边距和边框在内的总宽度 */
+}
 
 /* 媒体查询：小屏幕设备样式 */
 @media (max-width: 600px) {

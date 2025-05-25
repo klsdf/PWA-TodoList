@@ -83,6 +83,7 @@ export class ElementCreator {
         const li = ElementCreator.createLi(todoText);
         li.addEventListener('click', onClickLi);
         const deleteButton = ElementCreator.createDeleteButton();
+        deleteButton.classList.add('delete-button');
         deleteButton.addEventListener('click', (event) => {
             event.stopPropagation(); // 阻止事件冒泡
             list.removeChild(li);
