@@ -6,7 +6,7 @@ export class DebugPage extends Page {
         // 添加输入框和按钮
         const inputContainer = document.getElementById('json-input-container');
         if (inputContainer) {
-            const saveButton = document.getElementById('save-json');
+            const saveButton = document.getElementById('save-json-button');
             saveButton?.addEventListener('click', () => {
                 const jsonInput = document.getElementById('json-input');
                 if (jsonInput) {
@@ -20,6 +20,11 @@ export class DebugPage extends Page {
                         alert('无效的 JSON 数据');
                     }
                 }
+            });
+            const deleteButton = document.getElementById('delete-json-button');
+            deleteButton?.addEventListener('click', () => {
+                localStorage.removeItem(SaveManager.appDataKey); // 删除存档
+                alert('存档已删除');
             });
         }
     }
