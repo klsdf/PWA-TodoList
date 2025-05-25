@@ -38,3 +38,7 @@
 .past-day {
     background-color: lightgray; /* 过去的天 */
 }
+
+.future-day {
+    background-color: lightblue; /* 未来的天 */
+}

@@ -1,7 +1,27 @@
 import { Page } from './Page.js';
+import { SaveManager } from '../SaveManager.js';
 export class DebugPage extends Page {
     onEnter(appData) {
         DebugPage.displayJsonData(appData);
+        // 添加输入框和按钮
+        const inputContainer = document.getElementById('json-input-container');
+        if (inputContainer) {
+            const saveButton = document.getElementById('save-json');
+            saveButton?.addEventListener('click', () => {
+                const jsonInput = document.getElementById('json-input');
+                if (jsonInput) {
+                    try {
+                        const newData = JSON.parse(jsonInput.value);
+                        Object.assign(appData, newData); // 更新 appData
+                        SaveManager.saveAppData(appData); // 保存数据
+                        alert('JSON 数据已保存');
+                    }
+                    catch (error) {
+                        alert('无效的 JSON 数据');
+                    }
+                }
+            });
+        }
     }
     onLeave() {
     }
@@ -10,7 +30,7 @@ export class DebugPage extends Page {
       * @function
       */
     static displayJsonData(appData) {
-        $('#json-display').text("appData:\n" + JSON.stringify(appData, null, 2));
+        $('#json-display').text(JSON.stringify(appData, null, 2));
     }
 }
 //# sourceMappingURL=DebugPage.js.map

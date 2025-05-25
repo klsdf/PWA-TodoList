@@ -85,6 +85,8 @@ export class PlanPage extends Page {
                     row.classList.add('current-day'); // 当前天
                 } else if (date < today) {
                     row.classList.add('past-day'); // 过去的天
+                } else {
+                    row.classList.add('future-day'); // 未来的天
                 }
 
                 table.appendChild(row);

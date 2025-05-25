@@ -3,3 +3,8 @@
 @import url("./css/PlanPage.css");
 @import url("./css/HabitPage.css");
 
+.full-width {
+    width: 100%;
+    box-sizing: border-box; /* 包括内边距和边框在内的总宽度 */
+}
+

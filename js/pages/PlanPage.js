@@ -71,6 +71,9 @@ export class PlanPage extends Page {
                 else if (date < today) {
                     row.classList.add('past-day'); // 过去的天
                 }
+                else {
+                    row.classList.add('future-day'); // 未来的天
+                }
                 table.appendChild(row);
             }
             planContainer.appendChild(table);
