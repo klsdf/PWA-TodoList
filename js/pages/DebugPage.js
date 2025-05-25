@@ -1,6 +1,6 @@
 import { Page } from './Page.js';
 export class DebugPage extends Page {
-    static onEnter(appData) {
+    onEnter(appData) {
         DebugPage.displayJsonData(appData);
     }
     onLeave() {
@@ -10,7 +10,7 @@ export class DebugPage extends Page {
       * @function
       */
     static displayJsonData(appData) {
-        $('#json-display').text(JSON.stringify(appData, null, 2));
+        $('#json-display').text("appData:\n" + JSON.stringify(appData, null, 2));
     }
 }
 //# sourceMappingURL=DebugPage.js.map

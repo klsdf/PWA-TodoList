@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "@types/jquery": "^3.5.32"
+  },
+  "scripts": {
+    "start": "tsc --watch"
   }
 }

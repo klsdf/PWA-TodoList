@@ -1,5 +1,7 @@
 import { DebugPage } from './pages/DebugPage.js';
 import { HabitPage } from './pages/HabitPage.js';
+import { PlanPage } from './pages/PlanPage.js';
+import { StatsPage } from './pages/StatsPage.js';
 import { SaveManager } from './SaveManager.js';
 export var PageId;
 (function (PageId) {
@@ -27,14 +29,32 @@ export class PageChanger {
         $('.page').hide();
         // 显示指定页面
         $(`#${pageId}`).show();
+        // 获取当前页面，出栈
+        const currentPage = PageChanger.currentPage;
+        if (currentPage) {
+            currentPage.onLeave();
+        }
         const appData = SaveManager.loadAppData();
-        switch (pageId) {
-            case PageId.Habit:
-                HabitPage.onEnter(appData);
-                break;
-            case PageId.Debug:
-                DebugPage.onEnter(appData);
-                break;
+        if (!PageChanger.pageInstances[pageId]) {
+            switch (pageId) {
+                case PageId.Habit:
+                    PageChanger.pageInstances[pageId] = new HabitPage();
+                    break;
+                case PageId.Debug:
+                    PageChanger.pageInstances[pageId] = new DebugPage();
+                    break;
+                case PageId.Plan:
+                    PageChanger.pageInstances[pageId] = new PlanPage();
+                    break;
+                case PageId.Stats:
+                    PageChanger.pageInstances[pageId] = new StatsPage();
+                    break;
+            }
+        }
+        const pageInstance = PageChanger.pageInstances[pageId];
+        if (pageInstance) {
+            pageInstance.onEnter(appData);
+            PageChanger.currentPage = pageInstance;
         }
     }
     static changePage(pageId) {
@@ -52,4 +72,5 @@ export class PageChanger {
     }
 }
 PageChanger.currentPage = null;
+PageChanger.pageInstances = {};
 //# sourceMappingURL=PageChanger.js.map

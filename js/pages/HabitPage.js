@@ -2,8 +2,15 @@ import { Page } from './Page.js';
 import { SaveManager } from '../SaveManager.js';
 import { ElementCreator } from '../ElementCreator.js';
 import { ElementGetter } from '../ElementGetter.js';
+/**
+ * 习惯页面类
+ * @class
+ * @extends Page
+ * @method onEnter
+ * @method onLeave
+ */
 export class HabitPage extends Page {
-    static onEnter(appData) {
+    onEnter(appData) {
         HabitPage.updatePage(appData);
         // HabitPage.checkAndUpdateTodos(appData);
     }

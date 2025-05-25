@@ -1,0 +1,68 @@
+
+#habit-page {
+    padding: 20px;
+}
+
+
+/* 输入框样式 */
+#new-todo {
+    width: 80%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* placeholder样式 */
+#new-todo::placeholder {
+    color: #888;
+    padding-left: 10px;
+}
+
+/* 添加按钮样式 */
+#add-todo {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 添加按钮悬停样式 */
+#add-todo:hover {
+    background-color: #45a049;
+}
+
+/* 待办事项列表样式 */
+#todo-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+
+/* 待办事项删除按钮样式 */
+
+
+/* 待办事项删除按钮悬停样式 */
+#todo-list li button:hover {
+    background-color: #e53935;
+}
+
+/* 已完成事项列表样式 */
+#completed-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+#completed-list li {
+    background-color: #eaeaea8a;
+}
+#completed-list li span{
+    text-decoration: line-through; /* 默认加上删除线 */
+}

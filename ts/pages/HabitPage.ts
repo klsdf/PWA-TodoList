@@ -4,8 +4,17 @@ import { SaveManager } from '../SaveManager.js';
 import { ElementCreator } from '../ElementCreator.js';
 import { ElementGetter } from '../ElementGetter.js';
 
+
+
+/**
+ * 习惯页面类
+ * @class
+ * @extends Page
+ * @method onEnter
+ * @method onLeave
+ */
 export class HabitPage extends Page {
-    static onEnter(appData: AppData) {
+    override onEnter(appData: AppData) {
         HabitPage.updatePage(appData);
         // HabitPage.checkAndUpdateTodos(appData);
     }

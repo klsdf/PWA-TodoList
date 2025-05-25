@@ -13,15 +13,15 @@
 
 <body>
 
-
     <!-- 习惯页面 -->
     <div id="habit-page" class="page">
         <h1>待办事项列表</h1>
         <div id="todo-list-container">
+            <h2>今日待办</h2>
             <input type="text" id="new-todo" placeholder="输入新的待办事项">
             <button id="add-todo">添加</button>
-            <h2>今日待办</h2>
             <ul id="todo-list"></ul>
+  
         </div>
         <div id="completed-list-container">
             <h2>今日完成</h2>
@@ -32,20 +32,21 @@
     <!-- 统计页面 -->
     <div id="stats-page" class="page" style="display: none;">
         <h1>统计页面</h1>
-        <p id="completed-count"></p>
-
+        <p id="completed-count">今日完成：0 / 0</p>
     </div>
 
 
     <!-- 计划页面 -->
     <div id="plan-page" class="page" style="display: none;">
         <h1>计划页面</h1>
+        <!-- 日期列表将被动态插入到这里 -->
     </div>
 
     <!-- 测试页面 -->
     <div id="debug-page" class="page" style="display: none;">
         <h1>测试页面</h1>
-        <pre id="json-display" style="text-align: left; background-color: #f4f4f9; padding: 10px; border: 2px solid #ddd;"></pre>
+        <pre id="json-display"
+            style="text-align: left; background-color: #f4f4f9; padding: 10px; border: 2px solid #ddd;"></pre>
         <button id="copy-json-button">复制JSON</button>
     </div>
 

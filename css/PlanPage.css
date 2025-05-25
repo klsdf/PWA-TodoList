@@ -1,0 +1,40 @@
+/* 表格样式 */
+.plan-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed;
+}
+
+.plan-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.plan-table td:first-child,
+.plan-table td:nth-child(2) {
+    width: 8%;
+    max-width: 100px;
+}
+
+.plan-table td:last-child {
+    width: 74%;
+}
+
+/* .plan-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+} */
+
+/* .plan-table tr:hover {
+    background-color: #f1f1f1;
+} */
+
+.current-day {
+    background-color: lightgreen; /* 当前天 */
+}
+
+.past-day {
+    background-color: lightgray; /* 过去的天 */
+}

@@ -2,10 +2,10 @@ import { Page } from './Page.js';
 import { AppData } from '../AppData.js';
 
 export class DebugPage extends Page {
-    static onEnter(appData: AppData) {
+    override onEnter(appData: AppData) {
         DebugPage.displayJsonData(appData);
     }
-    onLeave() {
+    override onLeave() {
 
     }
     /** 
@@ -13,7 +13,7 @@ export class DebugPage extends Page {
       * @function
       */
     static displayJsonData(appData: AppData) {
-        $('#json-display').text(JSON.stringify(appData, null, 2));
+        $('#json-display').text("appData:\n" + JSON.stringify(appData, null, 2));
     }
 }
 

@@ -43,4 +43,18 @@ self.addEventListener('fetch', (event) => {
     );
 });
 
+// 监听推送事件
+self.addEventListener('push', function(event) {
+    const options = {
+        body: '该吃药了！',
+        icon: '/icons/192x192.png',
+        vibrate: [200, 100, 200],
+        tag: 'daily-reminder'
+    };
+
+    event.waitUntil(
+        self.registration.showNotification('提醒', options)
+    );
+});
+
 

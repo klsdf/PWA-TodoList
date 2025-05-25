@@ -1,8 +1,11 @@
 import { Page } from './pages/Page.js';
 import { DebugPage } from './pages/DebugPage.js';
 import { HabitPage } from './pages/HabitPage.js';
+import { PlanPage } from './pages/PlanPage.js';
+import { StatsPage } from './pages/StatsPage.js';
 import { AppData } from './AppData.js';
 import { SaveManager } from './SaveManager.js';
+
 
 
 export enum PageId {
@@ -23,6 +26,8 @@ export enum PageId {
 export class PageChanger {
 
     static currentPage: Page | null = null;
+    static pageInstances: { [key in PageId]?: Page } = {};
+
     /** 
      * 显示指定页面
      * @function
@@ -35,15 +40,35 @@ export class PageChanger {
         $(`#${pageId}`).show();
 
 
+        // 获取当前页面，出栈
+        const currentPage = PageChanger.currentPage;
+        if (currentPage) {
+            currentPage.onLeave();
+        }
+
         const appData: AppData = SaveManager.loadAppData();
 
-        switch (pageId) {
-            case PageId.Habit:
-                HabitPage.onEnter(appData);
-                break;
-            case PageId.Debug:
-                DebugPage.onEnter(appData);
-                break;
+        if (!PageChanger.pageInstances[pageId]) {
+            switch (pageId) {
+                case PageId.Habit:
+                    PageChanger.pageInstances[pageId] = new HabitPage();
+                    break;
+                case PageId.Debug:
+                    PageChanger.pageInstances[pageId] = new DebugPage();
+                    break;
+                case PageId.Plan:
+                    PageChanger.pageInstances[pageId] = new PlanPage();
+                    break;
+                case PageId.Stats:
+                    PageChanger.pageInstances[pageId] = new StatsPage();
+                    break;
+            }
+        }
+
+        const pageInstance = PageChanger.pageInstances[pageId];
+        if (pageInstance) {
+            pageInstance.onEnter(appData);
+            PageChanger.currentPage = pageInstance;
         }
     }
 
