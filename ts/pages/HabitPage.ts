@@ -16,11 +16,9 @@ import { ElementGetter } from '../ElementGetter.js';
 export class HabitPage extends Page {
     override onEnter(appData: AppData) {
         HabitPage.updatePage(appData);
-        // HabitPage.checkAndUpdateTodos(appData);
 
         // 添加按钮点击事件
-        const completeTodayButton = document.getElementById('complete-today-button');
-        completeTodayButton?.addEventListener('click', () => {
+         $('#complete-today-button').on('click', () => {
             HabitPage.moveCompletedToTodos(appData);
         });
     }
@@ -28,30 +26,7 @@ export class HabitPage extends Page {
 
 
     }
-    /** 
-        * 检查并更新待办事项
-        * @function
-        */
-    static checkAndUpdateTodos(appData: AppData) {
-        const lastVisitDate = appData.lastVisitDate;
-        const currentDate = new Date().toLocaleString();
 
-        if (lastVisitDate !== currentDate.split(',')[0]) {
-            // 如果是新的一天，将所有已完成事项移回待办事项
-            $('#completed-list li').each(function () {
-                const todoText = $(this).text();
-                ElementCreator.createTodoLi(todoText);
-                $(this).remove();
-            });
-            appData.todos.push(...appData.completedTodos);
-            appData.completedTodos = [];
-            SaveManager.saveAppData(appData);
-        }
-
-        // 更新最后访问日期
-        appData.lastVisitDate = currentDate;
-        SaveManager.saveAppData(appData);
-    }
 
     /** 
      * 将所有已完成事项移回待办事项
@@ -59,7 +34,8 @@ export class HabitPage extends Page {
      */
     static moveCompletedToTodos(appData: AppData) {
         $('#completed-list li').each(function () {
-            const todoText = $(this).text();
+            const todoText = $(this).find("span").text();
+            console.log(todoText);
             ElementCreator.createTodoLi(todoText);
             $(this).remove();
         });
@@ -67,6 +43,8 @@ export class HabitPage extends Page {
         appData.completedTodos = [];
         SaveManager.saveAppData(appData);
     }
+
+    
 
     static updatePage(appData: AppData) {
         const todos = appData.todos;
