@@ -12,7 +12,8 @@ export class SaveManager {
         }
         else {
             console.warn("没有找到appData，但是创建了新的appData");
-            return new AppData();
+            this.saveAppData(new AppData());
+            return this.loadAppData();
         }
     }
     static saveAppData(appData) {

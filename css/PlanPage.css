@@ -42,3 +42,33 @@
 .future-day {
     background-color: lightblue; /* 未来的天 */
 }
+
+.drag-handle {
+  width: 16px;
+  height: 16px;
+  background: #888;
+  margin-right: 8px;
+  border-radius: 3px;
+  cursor: grab;
+  flex-shrink: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+}
+
+.todo-text {
+  flex: 1;
+  min-width: 0;
+  word-break: break-all;
+  outline: none;
+  padding: 2px 4px;
+  text-align: left;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+}
+

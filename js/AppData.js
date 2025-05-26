@@ -1,6 +1,6 @@
 class PlanItem {
-    constructor(date, dayOfWeek, content) {
-        this.date = date;
+    constructor(dateToDayString, dayOfWeek, content) {
+        this.dateToDayString = dateToDayString;
         this.dayOfWeek = dayOfWeek;
         this.content = content;
     }

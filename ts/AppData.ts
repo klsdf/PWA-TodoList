@@ -1,13 +1,14 @@
 class PlanItem {
-    date: Date;
+    dateToDayString: string;
     dayOfWeek: string;
     content: string[];
 
-    constructor(date: Date, dayOfWeek: string, content: string[]) {
-        this.date = date;
+    constructor(dateToDayString: string, dayOfWeek: string, content: string[]) {
+        this.dateToDayString = dateToDayString;
         this.dayOfWeek = dayOfWeek;
         this.content = content;
     }
+
 }
 
 class AppData {
