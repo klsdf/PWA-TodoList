@@ -72,3 +72,7 @@ li {
   align-items: center;
 }
 
+ul {
+  min-height: 32px;
+}
+

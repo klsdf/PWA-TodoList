@@ -44,20 +44,40 @@ export class PlanPage extends Page {
                 date.setDate(today.getDate() + i);
 
                 const dayOfWeek = daysOfWeek[date.getDay()];
-                const dateString = date.toLocaleDateString();
+
 
                 const row = document.createElement('tr');
 
                 const dateCell = document.createElement('td');
-                dateCell.textContent = dateString;
+                dateCell.classList.add('date-cell');
+                dateCell.textContent = dateToDayString(date);
                 row.appendChild(dateCell);
 
                 const dayCell = document.createElement('td');
+                dayCell.classList.add('day-cell');
                 dayCell.textContent = dayOfWeek;
                 row.appendChild(dayCell);
 
                 const contentCell = document.createElement('td');
+                contentCell.classList.add('content-cell');
                 const ul = document.createElement('ul');
+
+
+
+                // 为ul添加sortable
+                new Sortable(ul, {
+                    group: 'plan-list',
+                    handle: '.drag-handle',
+                    animation: 150,
+                    emptyInsertThreshold: 20, // 鼠标距离ul边缘20px内可插入
+                    onEnd: (evt: any) => {
+                        this.savePlanItem(evt.from);
+                        if (evt.to !== evt.from) {
+                            this.savePlanItem(evt.to);
+                        }
+                        console.log("拖拽结束");
+                    }
+                });
 
                 contentCell.appendChild(ul);
                 // contentCell.contentEditable = 'true'; // 使单元格内容可编辑
@@ -66,7 +86,6 @@ export class PlanPage extends Page {
                 const savedItem: PlanItem | undefined = planItems.find(
                     item => item.dateToDayString === dateToDayString(date));
                 if (savedItem) {
-                    console.log("找到", savedItem);
                     // 如果有保存的内容，加载它
                     for (const text of savedItem.content) {
                         this.addLiToUl(ul, date, dayOfWeek, text);
@@ -77,30 +96,9 @@ export class PlanPage extends Page {
                 } else {
                     // 如果没有保存的内容，使用默认内容
                     this.addLiToUl(ul, date, dayOfWeek, "内容");
-                    // contentCell.innerHTML =
-                    //     `<ul>
-                    //     <li class="todo-item"><span class="drag-handle"></span><span contenteditable="true" class="todo-text">内容</span></li>
-                    // </ul>`;
                 }
 
 
-
-
-                // contentCell.addEventListener('keydown', (event) => {
-                //     if (event.key === 'Enter') {
-                //         event.preventDefault(); // 阻止默认的回车行为
-                //         document.execCommand('insertHTML', false, '<li><br></li>'); // 插入新的 <li>
-                //     }
-                // });
-
-                // contentCell.addEventListener('blur', () => {
-                //     console.log('编辑完成'); // 当失去焦点时打印
-                //     const listItems = contentCell.querySelectorAll('li');
-                //     const content = Array.from(listItems).map(li => li.textContent || '');
-                //     const planItem = new PlanItem(date, dayOfWeek, content);
-                //     appData.planItems.push(planItem);
-                //     SaveManager.saveAppData(appData); // 保存数据
-                // });
                 row.appendChild(contentCell);
 
                 // 根据日期设置行的类名
@@ -111,40 +109,31 @@ export class PlanPage extends Page {
                 } else {
                     row.classList.add('future-day'); // 未来的天
                 }
-
-
-
-
                 table.appendChild(row);
             }
 
             planContainer.appendChild(table);
         }
 
-
-
-
-        // new Sortable(document.getElementById('todo-list'), {
-        //     handle: '.drag-handle',
-        //     animation: 150,
-        //     onEnd: function (evt) {
-        //         // 这里可以同步更新appData.todos的顺序
-        //     }
-        // });
     }
 
 
 
-    savePlanItem(ul: HTMLElement, date: Date, dayOfWeek: string) {
+    savePlanItem(ul: HTMLElement) {
         const listItems = ul.querySelectorAll('li');
         const content: string[] = Array.from(listItems).map(li => li.textContent || '');
 
-        const planItem = new PlanItem(dateToDayString(date), dayOfWeek, content);
+
+
+        const dateStr = ul.parentElement?.parentElement?.querySelector('.date-cell')?.textContent;
+        const dayOfWeekStr = ul.parentElement?.parentElement?.querySelector('.day-cell')?.textContent;
+
+        const planItem = new PlanItem(dateStr ?? "", dayOfWeekStr ?? "", content);
 
         const savedAppData = SaveManager.loadAppData();
         const planItems = savedAppData.planItems || [];
         console.log(planItems);
-        const idx = planItems.findIndex(item => item.dateToDayString === dateToDayString(date));
+        const idx = planItems.findIndex(item => item.dateToDayString === dateStr);
 
         if (idx !== -1) {
             // 覆盖内容
@@ -157,6 +146,14 @@ export class PlanPage extends Page {
         SaveManager.saveAppData(savedAppData); // 保存数据
     }
 
+
+    /**
+     * 添加一个li到ul中
+     * @param {HTMLElement} ul - 要添加li的ul
+     * @param {Date} date - 日期
+     * @param {string} dayOfWeek - 星期几
+     * @param {string} content - 内容
+     */
     addLiToUl(ul: HTMLElement, date: Date, dayOfWeek: string, content: string) {
 
         const li = document.createElement('li');
@@ -166,13 +163,8 @@ export class PlanPage extends Page {
         dragHandle.classList.add('drag-handle');
 
 
-        new Sortable(ul, {
-            handle: '.drag-handle',
-            animation: 150,
-            onEnd: (evt: any) => {
-                this.savePlanItem(ul, date, dayOfWeek);
-            }
-        });
+
+
 
 
 
@@ -188,7 +180,7 @@ export class PlanPage extends Page {
 
         text.addEventListener('blur', () => {
             console.log('编辑完成'); // 当失去焦点时打印
-            this.savePlanItem(ul, date, dayOfWeek);
+            this.savePlanItem(ul);
         });
 
 
@@ -204,18 +196,9 @@ export class PlanPage extends Page {
         });
 
 
+
+
         ul.appendChild(li);
-
-
-
-        // ul.innerHTML +=
-        //     `<li class="todo-item">
-        //     <span class="drag-handle">
-        //     </span><span contenteditable="true" class="todo-text">${content}</span>
-        // </li>`; // 插入新的 <li>
-        //为每一个li添加blur事件
-
-
 
     }
 
