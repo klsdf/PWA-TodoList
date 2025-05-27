@@ -154,7 +154,7 @@ export class PlanPage extends Page {
      * @param {string} dayOfWeek - 星期几
      * @param {string} content - 内容
      */
-    addLiToUl(ul: HTMLElement, date: Date, dayOfWeek: string, content: string) {
+    addLiToUl(ul: HTMLElement, date: Date, dayOfWeek: string, content: string): HTMLElement {
 
         const li = document.createElement('li');
         li.classList.add('todo-item');
@@ -190,8 +190,19 @@ export class PlanPage extends Page {
         text.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
                 event.preventDefault(); // 阻止默认的回车行为
-
-                this.addLiToUl(ul, date, dayOfWeek, "内容");
+                const newText = this.addLiToUl(ul, date, dayOfWeek, "内容");
+                // 聚焦新输入框
+                if (newText) {
+                    // 将光标移动到内容末尾
+                    newText.focus();
+                    // 可选：将光标放到内容最后
+                    const range = document.createRange();
+                    range.selectNodeContents(newText);
+                    range.collapse(false);
+                    const sel = window.getSelection();
+                    sel?.removeAllRanges();
+                    sel?.addRange(range);
+                }
             }
         });
 
@@ -200,6 +211,7 @@ export class PlanPage extends Page {
 
         ul.appendChild(li);
 
+        return text; // 返回新建的输入框
     }
 
     override onLeave() {

@@ -139,10 +139,23 @@ export class PlanPage extends Page {
         text.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
                 event.preventDefault(); // 阻止默认的回车行为
-                this.addLiToUl(ul, date, dayOfWeek, "内容");
+                const newText = this.addLiToUl(ul, date, dayOfWeek, "内容");
+                // 聚焦新输入框
+                if (newText) {
+                    // 将光标移动到内容末尾
+                    newText.focus();
+                    // 可选：将光标放到内容最后
+                    const range = document.createRange();
+                    range.selectNodeContents(newText);
+                    range.collapse(false);
+                    const sel = window.getSelection();
+                    sel?.removeAllRanges();
+                    sel?.addRange(range);
+                }
             }
         });
         ul.appendChild(li);
+        return text; // 返回新建的输入框
     }
     onLeave() {
         // 离开页面时的逻辑

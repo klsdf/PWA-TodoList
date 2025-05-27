@@ -81,3 +81,22 @@
 #complete-today-button:hover {
     background-color: #45a049;
 }
+
+
+
+/* 媒体查询：小屏幕设备样式 */
+@media (max-width: 600px) {
+    #new-todo, #add-todo {
+        width: 100%; /* 确保输入框和按钮占满宽度 */
+        font-size: 18px;
+    }
+    #todo-list li {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #todo-list li button {
+        margin-left: 10px;
+        width: auto;
+    }
+}

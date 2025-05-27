@@ -58,6 +58,11 @@ li {
   align-items: center;
 }
 
+li:hover {
+  background-color: #f0f0f0; /* 改变背景颜色 */
+  cursor: pointer; /* 鼠标指针变为手型 */
+}
+
 .todo-text {
   flex: 1;
   min-width: 0;
@@ -74,5 +79,42 @@ li {
 
 ul {
   min-height: 32px;
+}
+
+@media (max-width: 600px) {
+  .plan-table {
+    font-size: 16px;
+    table-layout: auto;
+    width: 100%;
+  }
+  .plan-table tr {
+    display: block;
+    margin-bottom: 16px;
+    border-bottom: 2px solid #eee;
+  }
+  .plan-table td {
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    text-align: left;
+    white-space: normal;
+    word-break: break-all;
+    padding: 8px 4px;
+  }
+  .plan-table td:first-child,
+  .plan-table td:nth-child(2),
+  .plan-table td:last-child {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .plan-table ul {
+    min-height: 32px;
+    padding-left: 0;
+  }
+  .todo-text {
+    font-size: 16px;
+    padding: 4px 0;
+  }
 }
 
